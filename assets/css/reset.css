@@ -1,0 +1,65 @@
+/* =========================================
+   CSS RESET & BASE STYLES
+   ========================================= */
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+    font-size: 16px; /* Base font size */
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--transition-fast);
+}
+
+ul, ol {
+    list-style: none;
+}
+
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button, input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+
+/* =========================================
+   GLOBAL CONTAINER (Fixes Left/Right Spacing)
+   ========================================= */
+.container {
+    max-width: 1200px !important; /* কন্টেন্টকে ১২০০ পিক্সেলের বেশি বড় হতে দেবে না */
+    width: 100%;
+    margin: 0 auto !important; /* স্ক্রিনের একদম মাঝখানে রাখবে */
+    padding: 0 25px !important; /* ডানে এবং বামে ২৫ পিক্সেল ফাঁকা জায়গা তৈরি করবে */
+}

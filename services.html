@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Rahmat Ullah - Digital Marketing Strategist</title>
+    
+    <meta name="description" content="Explore professional digital marketing services by Rahmat Ullah: Advanced SEO, Google Ads, Meta Ads, Server-Side Tracking, and Web Development.">
+    
+    <!-- Fonts, Icons, AOS & Swiper CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- Page Specific Styles (For Zig-Zag Layout & Badges) -->
+    <style>
+        .service-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+        .service-row:nth-child(even) .service-img-col { order: 2; }
+        .service-row:nth-child(even) .service-text-col { order: 1; }
+        
+        .service-details-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--primary-color);
+            padding: 15px 20px;
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+        .service-details-box h5 { color: var(--text-primary); margin-bottom: 5px; font-size: 0.95rem; }
+        .service-details-box p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px; line-height: 1.5; }
+        .service-details-box p:last-child { margin-bottom: 0; }
+        
+        .process-step { position: relative; padding-left: 40px; margin-bottom: 30px; }
+        .process-step::before {
+            content: ''; position: absolute; left: 11px; top: 0; bottom: -30px;
+            width: 2px; background: var(--glass-border);
+        }
+        .process-step:last-child::before { display: none; }
+        .process-icon {
+            position: absolute; left: 0; top: 0; width: 24px; height: 24px;
+            background: var(--primary-color); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 0.7rem; box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .service-row { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 60px; }
+            .service-row:nth-child(even) .service-img-col, 
+            .service-row:nth-child(odd) .service-img-col { order: 1; }
+            .service-row:nth-child(even) .service-text-col, 
+            .service-row:nth-child(odd) .service-text-col { order: 2; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. NAVBAR (Desktop) -->
+    <header class="header" id="header">
+      <nav class="navbar container">
+        <a href="index.html" class="logo">Rahmat<span>.</span></a>
+        <div class="nav-menu mobile-only-hide" id="nav-menu">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-item">
+              <a href="about.html" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px"></i></a>
+              <div class="dropdown-menu">
+                <a href="about.html">About Me</a>
+                <a href="about.html#skills">Skills & Tools</a>
+                <a href="about.html#certifications">Certifications</a>
+                <a href="about.html#training">Training</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="services.html" class="nav-link active">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px"></i></a>
+              <div class="dropdown-menu">
+                <a href="services.html#seo">SEO</a>
+                <a href="services.html#google-ads">Google Ads</a>
+                <a href="services.html#meta-ads">Meta Ads</a>
+                <a href="services.html#analytics">Analytics & Tracking</a>
+              </div>
+            </li>
+            <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
+            <li class="nav-item"><a href="courses.html" class="nav-link">Courses</a></li>
+            <li class="nav-item"><a href="free-hosting.html" class="nav-link">free-hosting</a></li>
+            <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">contact</a></li>
+          </ul>
+        </div>
+        <div class="nav-actions mobile-only-hide">
+          <button class="theme-toggle" id="theme-button"><i class="fa-regular fa-sun" id="theme-icon"></i></button>
+          <a href="contact.html" class="btn btn-primary btn-transparent-hover">Let's Talk</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- MOBILE APP BOTTOM BAR -->
+    <div class="bottom-app-bar mobile-only">
+        <a href="index.html" class="app-bar-item"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="services.html" class="app-bar-item active"><i class="fa-solid fa-briefcase"></i>Services</a>
+        <a href="courses.html" class="app-bar-item"><i class="fa-solid fa-graduation-cap"></i>Courses</a>
+        <a href="contact.html" class="app-bar-item"><i class="fa-solid fa-paper-plane"></i>Contact</a>
+        <div class="app-bar-item" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i>Menu</div>
+    </div>
+
+    <!-- MOBILE FULL SCREEN MENU OVERLAY -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <i class="fa-solid fa-xmark close-menu" id="close-menu"></i>
+        <div class="mobile-menu-list">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Me</a>
+            <a href="services.html" style="color: var(--primary-color);">Services</a>
+            <a href="projects.html">Projects</a>
+            <a href="courses.html">Courses</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <main class="main">
+
+        <!-- 2. HERO SECTION -->
+        <section class="hero section" style="padding-top: 150px; background: linear-gradient(to bottom, var(--bg-color), var(--surface-color));">
+            <div class="container center" data-aos="fade-up">
+                <span class="subtitle">What I Do</span>
+                <h1 class="title" style="font-size: clamp(2.5rem, 5vw, 4rem); max-width: 900px; margin: 0 auto 20px;">Data-Driven Marketing Solutions for <span style="color: var(--primary-color);">Measurable Growth.</span></h1>
+                <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 750px; margin: 0 auto 30px; line-height: 1.6;">
+                    From advanced search engine visibility to high-converting ad campaigns and pixel-perfect server-side tracking—I build digital ecosystems that scale your revenue.
+                </p>
+                <a href="#services-list" class="btn btn-primary">Explore Services <i class="fa-solid fa-arrow-down" style="margin-left: 8px;"></i></a>
+            </div>
+        </section>
+
+        <!-- 3. DETAILED SERVICES (ZIG-ZAG LAYOUT) -->
+        <section class="section" id="services-list">
+            <div class="container">
+                
+                <!-- Service 1: Advanced SEO -->
+                <div class="service-row" id="seo" data-aos="fade-up">
+                    <div class="service-text-col">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <i class="fa-solid fa-magnifying-glass-chart" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+                            <h2 style="font-size: 2rem;">Advanced SEO</h2>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 15px; line-height: 1.6;">Comprehensive search engine dominance for local and international markets. Drive sustainable, high-intent organic traffic without recurring ad spend.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                            <span class="badge">Technical SEO</span><span class="badge">On-Page</span><span class="badge">Off-Page</span><span class="badge">Keyword Strategy</span>
+                        </div>
+                        <div class="service-details-box">
+                            <h5><i class="fa-solid fa-bullseye" style="color: var(--primary-color);"></i> Approach & Deliverables</h5>
+                            <p><strong>Approach:</strong> Deep technical audit ➔ Competitor gap analysis ➔ Content & backlink scaling.</p>
+                            <p><strong>Tools:</strong> Ahrefs, SEMrush, Google Search Console, Screaming Frog.</p>
+                            <p><strong>Deliverables:</strong> Monthly ranking reports, technical audit sheets, optimized content maps.</p>
+                        </div>
+                    </div>
+                    <div class="service-img-col floating-img">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Advanced SEO" style="width: 100%; border-radius: 12px; box-shadow: var(--shadow-glow); border: 1px solid var(--glass-border);">
+                    </div>
+                </div>
+
+                <!-- Service 2: Google Ads -->
+                <div class="service-row" id="google-ads" data-aos="fade-up">
+                    <div class="service-text-col">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <i class="fa-brands fa-google" style="font-size: 2.5rem; color: #38bdf8;"></i>
+                            <h2 style="font-size: 2rem;">Google Ads (SEM)</h2>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 15px; line-height: 1.6;">High-ROI search and display campaigns targeting users with active buying intent. Put your business at the top of Google the exact moment someone searches for you.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                            <span class="badge">Search Ads</span><span class="badge">Display Network</span><span class="badge">Performance Max</span><span class="badge">Remarketing</span>
+                        </div>
+                        <div class="service-details-box" style="border-left-color: #38bdf8;">
+                            <h5><i class="fa-solid fa-bullseye" style="color: #38bdf8;"></i> Approach & Deliverables</h5>
+                            <p><strong>Approach:</strong> Granular keyword targeting ➔ A/B testing ad copies ➔ Bid optimization based on CPA/ROAS.</p>
+                            <p><strong>Tools:</strong> Google Ads, Keyword Planner, Looker Studio.</p>
+                            <p><strong>Deliverables:</strong> Campaign setup structures, ad creatives, weekly ROI/ROAS reports.</p>
+                        </div>
+                    </div>
+                    <div class="service-img-col floating-img">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Google Ads" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2); border: 1px solid var(--glass-border);">
+                    </div>
+                </div>
+
+                <!-- Service 3: Facebook Ads -->
+                <div class="service-row" id="meta-ads" data-aos="fade-up">
+                    <div class="service-text-col">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <i class="fa-brands fa-meta" style="font-size: 2.5rem; color: #3b5998;"></i>
+                            <h2 style="font-size: 2rem;">Facebook & Meta Ads</h2>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 15px; line-height: 1.6;">Scroll-stopping visual campaigns that build brand awareness and drive direct sales. Reach your ideal demographic on the world’s largest social platform.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                            <span class="badge">Custom Audiences</span><span class="badge">Lookalike Targeting</span><span class="badge">Conversion Ads</span><span class="badge">Retargeting</span>
+                        </div>
+                        <div class="service-details-box" style="border-left-color: #3b5998;">
+                            <h5><i class="fa-solid fa-bullseye" style="color: #3b5998;"></i> Approach & Deliverables</h5>
+                            <p><strong>Approach:</strong> Audience testing ➔ Creative iteration ➔ Scaling winning ad sets.</p>
+                            <p><strong>Tools:</strong> Meta Business Manager, Facebook Pixel.</p>
+                            <p><strong>Deliverables:</strong> Ad creatives, audience segments, campaign performance dashboards.</p>
+                        </div>
+                    </div>
+                    <div class="service-img-col floating-img">
+                        <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Meta Ads" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(59, 89, 152, 0.2); border: 1px solid var(--glass-border);">
+                    </div>
+                </div>
+
+                <!-- Service 4: YouTube SEO -->
+                <div class="service-row" id="youtube-seo" data-aos="fade-up">
+                    <div class="service-text-col">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <i class="fa-brands fa-youtube" style="font-size: 2.5rem; color: #ef4444;"></i>
+                            <h2 style="font-size: 2rem;">YouTube SEO</h2>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 15px; line-height: 1.6;">Strategic optimization to rank your video content on both YouTube and Google Search. Build massive brand authority and generate passive views and leads.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                            <span class="badge">Title/Tag Optimization</span><span class="badge">Thumbnail Strategy</span><span class="badge">Retention Analysis</span>
+                        </div>
+                        <div class="service-details-box" style="border-left-color: #ef4444;">
+                            <h5><i class="fa-solid fa-bullseye" style="color: #ef4444;"></i> Approach & Deliverables</h5>
+                            <p><strong>Approach:</strong> Keyword mapping ➔ Video metadata optimization ➔ Engagement driving strategies.</p>
+                            <p><strong>Tools:</strong> TubeBuddy, VidIQ, YouTube Studio.</p>
+                            <p><strong>Deliverables:</strong> SEO-optimized titles, tags, descriptions, and channel audit reports.</p>
+                        </div>
+                    </div>
+                    <div class="service-img-col floating-img">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="YouTube SEO" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2); border: 1px solid var(--glass-border);">
+                    </div>
+                </div>
+
+                <!-- Service 5: Lead Generation -->
+                <div class="service-row" id="lead-gen" data-aos="fade-up">
+                    <div class="service-text-col">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <i class="fa-solid fa-magnet" style="font-size: 2.5rem; color: #f59e0b;"></i>
+                            <h2 style="font-size: 2rem;">Lead Generation</h2>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 15px; line-height: 1.6;">End-to-end funnels designed to capture high-quality B2B or B2C prospects. Fill your sales pipeline with qualified prospects who are ready to buy.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                            <span class="badge">Lead Magnets</span><span class="badge">Landing Pages</span><span class="badge">Email Sequences</span><span class="badge">B2B/B2C</span>
+                        </div>
+                        <div class="service-details-box" style="border-left-color: #f59e0b;">
+                            <h5><i class="fa-solid fa-bullseye" style="color: #f59e0b;"></i> Approach & Deliverables</h5>
+                            <p><strong>Approach:</strong> Target audience profiling ➔ Irresistible offer creation ➔ Funnel deployment.</p>
+                            <p><strong>Tools:</strong> Apollo, LinkedIn Sales Navigator, Mailchimp, ActiveCampaign.</p>
+                            <p><strong>Deliverables:</strong> Qualified lead lists, optimized opt-in funnels, nurture email sequences.</p>
+                        </div>
+                    </div>
+                    <div class="service-img-col floating-img">
+                        <img src="https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lead Generation" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(245, 158, 11, 0.2); border: 1px solid var(--glass-border);">
+                    </div>
+                </div>
+
+                <!-- Service 6: Social Media Marketing -->
+                <div class="service-row" id="social-media" data-aos="fade-up">
+                    <div class="service-text-col">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <i class="fa-solid fa-hashtag" style="font-size: 2.5rem; color: #8b5cf6;"></i>
+                            <h2 style="font-size: 2rem;">Social Media Marketing</h2>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 15px; line-height: 1.6;">Brand positioning and community management across key social channels. Build community trust and keep your brand top-of-mind for your audience.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                            <span class="badge">Content Calendars</span><span class="badge">Platform Growth</span><span class="badge">Community Management</span>
+                        </div>
+                        <div class="service-details-box" style="border-left-color: #8b5cf6;">
+                            <h5><i class="fa-solid fa-bullseye" style="color: #8b5cf6;"></i> Approach & Deliverables</h5>
+                            <p><strong>Approach:</strong> Brand voice alignment ➔ Consistent publishing ➔ Community interaction.</p>
+                            <p><strong>Tools:</strong> Buffer, Hootsuite, Canva, Meta Planner.</p>
+                            <p><strong>Deliverables:</strong> Monthly content calendars, engagement metrics, branded graphics.</p>
+                        </div>
+                    </div>
+                    <div class="service-img-col floating-img">
+                        <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Social Media Marketing" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.2); border: 1px solid var(--glass-border);">
+                    </div>
+                </div>
+
+                <!-- Service 7: Analytics & Tracking -->
+                <div class="service-row" id="analytics" data-aos="fade-up">
+                    <div class="service-text-col">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <i class="fa-solid fa-chart-pie" style="font-size: 2.5rem; color: #10b981;"></i>
+                            <h2 style="font-size: 2rem;">Analytics & Tracking</h2>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 15px; line-height: 1.6;">100% accurate data flow to ensure your decisions are based on facts. Prevent data loss from iOS updates and ad blockers to secure proper conversion attribution.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                            <span class="badge">Server-Side Tracking</span><span class="badge">GA4 Setup</span><span class="badge">GTM Integration</span><span class="badge">Meta CAPI</span>
+                        </div>
+                        <div class="service-details-box" style="border-left-color: #10b981;">
+                            <h5><i class="fa-solid fa-bullseye" style="color: #10b981;"></i> Approach & Deliverables</h5>
+                            <p><strong>Approach:</strong> Infrastructure setup ➔ Tag firing rules ➔ Data validation and cross-testing.</p>
+                            <p><strong>Tools:</strong> Google Tag Manager, GA4, Stape.io, Google Cloud.</p>
+                            <p><strong>Deliverables:</strong> Fully configured GTM containers, GA4 dashboards, verified CAPI integration.</p>
+                        </div>
+                    </div>
+                    <div class="service-img-col floating-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Analytics & Tracking" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.2); border: 1px solid var(--glass-border);">
+                    </div>
+                </div>
+
+                <!-- Service 8: Web Development -->
+                <div class="service-row" id="web-dev" data-aos="fade-up">
+                    <div class="service-text-col">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <i class="fa-solid fa-laptop-code" style="font-size: 2.5rem; color: #ec4899;"></i>
+                            <h2 style="font-size: 2rem;">Web Development</h2>
+                        </div>
+                        <p style="color: var(--text-muted); margin-bottom: 15px; line-height: 1.6;">Lightning-fast, conversion-optimized websites and landing pages. Turn your traffic into paying customers through seamless UX and fast loading speeds.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+                            <span class="badge">WordPress</span><span class="badge">WooCommerce</span><span class="badge">Landing Pages</span><span class="badge">HTML/CSS/JS</span>
+                        </div>
+                        <div class="service-details-box" style="border-left-color: #ec4899;">
+                            <h5><i class="fa-solid fa-bullseye" style="color: #ec4899;"></i> Approach & Deliverables</h5>
+                            <p><strong>Approach:</strong> UI/UX wireframing ➔ Speed-optimized coding ➔ Responsive cross-device testing.</p>
+                            <p><strong>Tools:</strong> WordPress, Elementor, VS Code, Figma.</p>
+                            <p><strong>Deliverables:</strong> Fully functional responsive websites, speed optimization reports, custom landing pages.</p>
+                        </div>
+                    </div>
+                    <div class="service-img-col floating-img">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Web Development" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(236, 72, 153, 0.2); border: 1px solid var(--glass-border);">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. MY PROCESS / WORKFLOW -->
+        <section class="section" style="background: var(--surface-color);">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header center">
+                    <span class="subtitle">Workflow</span>
+                    <h2 class="title">How I Deliver Results</h2>
+                </div>
+                <div style="max-width: 800px; margin: 40px auto 0;">
+                    <div class="process-step">
+                        <div class="process-icon">1</div>
+                        <h3 style="margin-bottom: 5px; color: var(--text-primary);">Discovery & Audit</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Understanding your business goals, target audience, and conducting a deep technical audit of your current digital presence.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-icon">2</div>
+                        <h3 style="margin-bottom: 5px; color: var(--text-primary);">Strategy Formulation</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Mapping out a customized funnel, selecting the right platforms (SEO/Ads), and setting up tracking frameworks.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-icon">3</div>
+                        <h3 style="margin-bottom: 5px; color: var(--text-primary);">Execution & Tracking</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Deploying campaigns, optimizing website content, and ensuring server-side tracking (CAPI, GA4) is 100% accurate.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-icon">4</div>
+                        <h3 style="margin-bottom: 5px; color: var(--text-primary);">Scale & Optimize</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Analyzing the incoming data, A/B testing ad creatives/copy, and scaling the budget on strategies that generate the highest ROI.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PRICING & PACKAGES [DEMO CONTENT] -->
+        <section class="section">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header center">
+                    <span class="subtitle">Investment [DEMO]</span>
+                    <h2 class="title">Simple & Transparent Pricing</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">* Note: These are placeholder packages. Final pricing depends on project scope.</p>
+                </div>
+                
+                <div class="pricing-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 40px; align-items: stretch;">
+                    
+                    <!-- Starter Package -->
+                    <div class="glass-card card-flat-hover pricing-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+                        <span class="badge" style="background: var(--surface-color); color: var(--text-muted); margin-bottom: 15px;">Starter</span>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 15px;">$XXX <span style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/mo</span></h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;">Ideal for local businesses starting their digital journey.</p>
+                        <ul class="pricing-list" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 30px; line-height: 2;">
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>Basic Local SEO</span></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>Google Business Profile Setup</span></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>Standard GA4 Tracking</span></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>Monthly Reporting</span></li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-secondary" style="width: 100%; text-align: center;">Inquire Now</a>
+                    </div>
+                    
+                    <!-- Growth Package (Highlighted) -->
+                    <div class="glass-card pricing-card highlighted-card" style="box-shadow: 0 10px 30px rgba(0, 200, 150, 0.2); border: 1px solid var(--primary-color); transform: scale(1.05); z-index: 10; position: relative;">
+                        <div class="popular-badge" style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: #fff; padding: 4px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; white-space: nowrap;">MOST POPULAR</div>
+                        <span class="badge" style="background: rgba(0,200,150,0.1); color: var(--primary-color); margin-bottom: 15px;">Growth Strategy</span>
+                        <h3 style="font-size: 2.2rem; margin-bottom: 15px;">$XXX <span style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/mo</span></h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;">For brands ready to scale aggressively with Ads.</p>
+                        <ul class="pricing-list" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 30px; line-height: 2;">
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>Advanced Google/Meta Ads</span></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>Server-Side Tracking (CAPI)</span></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>Conversion Rate Optimization</span></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>Bi-Weekly Strategy Calls</span></li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-primary" style="width: 100%; text-align: center;">Start Scaling</a>
+                    </div>
+                    
+                    <!-- Enterprise Package -->
+                    <div class="glass-card card-flat-hover pricing-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+                        <span class="badge" style="background: var(--surface-color); color: var(--text-muted); margin-bottom: 15px;">Enterprise</span>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 15px;">Custom</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;">Full digital ecosystem management for large operations.</p>
+                        <ul class="pricing-list" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 30px; line-height: 2;">
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>Omnichannel Strategy</span></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>Custom Web Development</span></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>Dedicated Lead Gen Funnels</span></li>
+                            <li><i class="fa-solid fa-check" style="color: var(--primary-color);"></i> <span>24/7 Priority Support</span></li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-secondary" style="width: 100%; text-align: center;">Book a Consultation</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. REAL RESULTS (MINI CASE STUDIES) [DEMO] -->
+        <section class="section" style="background: var(--surface-color);">
+            <div class="container" data-aos="zoom-in">
+                <div class="section-header center">
+                    <span class="subtitle">Proof of Concept [DEMO]</span>
+                    <h2 class="title">Numbers That Speak</h2>
+                </div>
+                
+                <div class="swiper resultsSwiper" style="padding: 20px 0 50px;">
+                    <div class="swiper-wrapper">
+                        <!-- Result 1 -->
+                        <div class="swiper-slide glass-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 4px solid var(--primary-color);">
+                            <h3 style="font-size: 1.2rem; margin-bottom: 10px;">E-commerce Brand</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Implemented Server-Side Tracking and restructured Meta Ads.</p>
+                            <div style="display: flex; gap: 20px;">
+                                <div>
+                                    <h4 style="color: var(--primary-color); font-size: 1.5rem;">350%</h4>
+                                    <p style="font-size: 0.8rem; color: var(--text-muted);">ROAS Increase</p>
+                                </div>
+                                <div>
+                                    <h4 style="color: var(--primary-color); font-size: 1.5rem;">-40%</h4>
+                                    <p style="font-size: 0.8rem; color: var(--text-muted);">CPA Reduction</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Result 2 -->
+                        <div class="swiper-slide glass-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 4px solid #38bdf8;">
+                            <h3 style="font-size: 1.2rem; margin-bottom: 10px;">B2B Tech SaaS</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Deep technical SEO audit and content mapping strategy.</p>
+                            <div style="display: flex; gap: 20px;">
+                                <div>
+                                    <h4 style="color: #38bdf8; font-size: 1.5rem;">Page 1</h4>
+                                    <p style="font-size: 0.8rem; color: var(--text-muted);">In 3 Months</p>
+                                </div>
+                                <div>
+                                    <h4 style="color: #38bdf8; font-size: 1.5rem;">2.5x</h4>
+                                    <p style="font-size: 0.8rem; color: var(--text-muted);">Organic Traffic</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Result 3 -->
+                        <div class="swiper-slide glass-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 4px solid #f59e0b;">
+                            <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Local Service Business</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Google Local Service Ads & GMB Optimization.</p>
+                            <div style="display: flex; gap: 20px;">
+                                <div>
+                                    <h4 style="color: #f59e0b; font-size: 1.5rem;">150+</h4>
+                                    <p style="font-size: 0.8rem; color: var(--text-muted);">Qualified Leads</p>
+                                </div>
+                                <div>
+                                    <h4 style="color: #f59e0b; font-size: 1.5rem;">$12</h4>
+                                    <p style="font-size: 0.8rem; color: var(--text-muted);">Cost Per Lead</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. FINAL CTA -->
+        <section class="section" style="text-align: center; padding: 100px 20px; background: linear-gradient(180deg, var(--bg-color) 0%, var(--surface-color) 100%);">
+            <div class="container" data-aos="zoom-in">
+                <h2 class="title" style="font-size: 2.5rem;">Stop Guessing. Start Scaling.</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 30px; font-size: 1.1rem;">Every successful campaign starts with a conversation. Let’s discuss your goals and build a custom strategy for your brand.</p>
+                <a href="contact.html" class="btn btn-primary" style="padding: 16px 40px; font-size: 1.1rem; box-shadow: 0 0 20px rgba(0, 200, 150, 0.4);">Book a Free Strategy Call <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 8. FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-block;">Rahmat<span>.</span></a>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Digital Marketing Strategist & Senior Mentor.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html">SEO Optimization</a></li>
+                    <li><a href="services.html">Paid Advertising</a></li>
+                    <li><a href="services.html">Analytics & Tracking</a></li>
+                    <li><a href="services.html">Web Development</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                    <li><a href="mailto:hello@rahmatullah.com"><i class="fa-solid fa-envelope"></i> Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Rahmat Ullah. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- FLOATING BUTTONS -->
+    <a href="https://wa.me/8801700000000" target="_blank" class="floating-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <div class="floating-chatbot" onclick="alert('AI Assistant is coming soon!')">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        /* Initialize AOS Animation */
+        AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 50 });
+
+        /* Initialize Swiper for Results Carousel */
+        if(typeof Swiper !== 'undefined') {
+            var resultsSwiper = new Swiper(".resultsSwiper", {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+                autoplay: { delay: 3000, disableOnInteraction: false },
+                pagination: { el: ".swiper-pagination", clickable: true },
+                breakpoints: {
+                    768: { slidesPerView: 2, spaceBetween: 30 },
+                    1024: { slidesPerView: 3, spaceBetween: 30 }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

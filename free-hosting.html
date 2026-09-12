@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Web Hosting | Rahmat Ullah</title>
+    
+    <meta name="description" content="Get premium-like free web hosting for your practice projects, portfolios, and testing. Perfect for digital marketing students.">
+    
+    <!-- Fonts, Icons & AOS CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- Free Hosting Specific Styles -->
+    <style>
+        .hosting-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 40px;
+        }
+        .feature-card {
+            background: var(--surface-color);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            background: rgba(0, 200, 150, 0.05);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        /* Step Process */
+        .step-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 40px;
+        }
+        .step-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+        }
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: var(--primary-color);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0,200,150,0.3);
+        }
+
+        /* FAQ Accordion */
+        details {
+            background: var(--surface-color);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        summary {
+            padding: 18px 20px;
+            font-weight: 500;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        details[open] summary::after { transform: rotate(180deg); }
+        .faq-content {
+            padding: 0 20px 20px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= START OF UNIVERSAL HEADER ================= -->
+    <header class="header" id="header">
+        <nav class="navbar container">
+            <a href="index.html" class="logo">Rahmat<span>.</span></a>
+            <div class="nav-menu mobile-only-hide" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="about.html">About Me</a>
+                            <a href="about.html#skills">Skills & Tools</a>
+                            <a href="about.html#certifications">Certifications</a>
+                            <a href="about.html#training">Training</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="services.html" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="services.html#seo">SEO</a>
+                            <a href="services.html#google-ads">Google Ads</a>
+                            <a href="services.html#meta-ads">Meta Ads</a>
+                            <a href="services.html#analytics">Analytics & Tracking</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
+                    <li class="nav-item"><a href="courses.html" class="nav-link">Courses</a></li>
+                    <li class="nav-item"><a href="free-hosting.html" class="nav-link active">free-hosting</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">contact</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions mobile-only-hide">
+                <button class="theme-toggle" id="theme-button"><i class="fa-regular fa-sun" id="theme-icon"></i></button>
+                <a href="contact.html" class="btn btn-primary btn-transparent-hover">Let's Talk</a>
+            </div>
+        </nav>
+    </header>
+    <!-- ================= END OF UNIVERSAL HEADER ================= -->
+
+    <!-- MOBILE APP BOTTOM BAR & OVERLAY -->
+    <div class="bottom-app-bar mobile-only">
+        <a href="index.html" class="app-bar-item"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="services.html" class="app-bar-item"><i class="fa-solid fa-briefcase"></i>Services</a>
+        <a href="courses.html" class="app-bar-item"><i class="fa-solid fa-graduation-cap"></i>Courses</a>
+        <a href="contact.html" class="app-bar-item"><i class="fa-solid fa-paper-plane"></i>Contact</a>
+        <div class="app-bar-item" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i>Menu</div>
+    </div>
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <i class="fa-solid fa-xmark close-menu" id="close-menu"></i>
+        <div class="mobile-menu-list">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Me</a>
+            <a href="services.html">Services</a>
+            <a href="projects.html">Projects</a>
+            <a href="courses.html">Courses</a>
+            <a href="free-hosting.html" style="color: var(--primary-color);">free-hosting</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">contact</a>
+        </div>
+    </div>
+
+    <main class="main">
+
+        <!-- 1. HERO SECTION -->
+        <section class="section" style="padding-top: 150px; background: linear-gradient(to bottom, var(--bg-color), var(--surface-color));">
+            <div class="container center" data-aos="fade-up">
+                <span class="subtitle">Student & Developer Resource</span>
+                <h1 class="title" style="font-size: clamp(2.5rem, 5vw, 4rem); max-width: 900px; margin: 0 auto 20px;">Launch Your Practice Site <br><span style="color: var(--primary-color);">Absolutely Free.</span></h1>
+                <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px; line-height: 1.6;">
+                    Perfect for digital marketing students, portfolio building, and tracking setup practice. Get access to a reliable free hosting environment to test your skills.
+                </p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="#claim-hosting" class="btn btn-primary">Claim Free Hosting <i class="fa-solid fa-server" style="margin-left: 8px;"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. FEATURES SECTION -->
+        <section class="section">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header center">
+                    <span class="subtitle">Features</span>
+                    <h2 class="title">Everything You Need to Start</h2>
+                </div>
+                <div class="hosting-features">
+                    <div class="feature-card">
+                        <i class="fa-brands fa-wordpress feature-icon"></i>
+                        <h4 style="margin-bottom: 10px; font-size: 1.2rem;">WordPress Ready</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">1-click WordPress installation to start building landing pages and testing tracking codes instantly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-lock feature-icon"></i>
+                        <h4 style="margin-bottom: 10px; font-size: 1.2rem;">Free SSL Certificate</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Secure your practice website with HTTPS for free to ensure browser compatibility and SEO safety.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-database feature-icon"></i>
+                        <h4 style="margin-bottom: 10px; font-size: 1.2rem;">MySQL & cPanel</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Full access to database management and a user-friendly control panel to manage your files.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-ban feature-icon"></i>
+                        <h4 style="margin-bottom: 10px; font-size: 1.2rem;">Zero Forced Ads</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">No annoying pop-ups or banners on your website. Keep your portfolio looking professional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. HOW TO CLAIM SECTION -->
+        <section class="section" id="claim-hosting" style="background: var(--surface-color);">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header center">
+                    <span class="subtitle">Getting Started</span>
+                    <h2 class="title">How to Claim Your Free Hosting</h2>
+                </div>
+                
+                <div class="step-container">
+                    <div class="step-box">
+                        <div class="step-number">1</div>
+                        <h4 style="margin-bottom: 15px; margin-top: 10px; color: var(--text-primary);">Create an Account</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Click the registration link and create your free account. You will need a valid email address for verification.</p>
+                    </div>
+                    <div class="step-box">
+                        <div class="step-number">2</div>
+                        <h4 style="margin-bottom: 15px; margin-top: 10px; color: var(--text-primary);">Setup Subdomain</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Choose a free subdomain (e.g., yourname.freehost.com) or connect your own custom domain if you have one.</p>
+                    </div>
+                    <div class="step-box">
+                        <div class="step-number">3</div>
+                        <h4 style="margin-bottom: 15px; margin-top: 10px; color: var(--text-primary);">Install WordPress</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Log into the control panel, use the auto-installer to setup WordPress, and start practicing your DM skills!</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 50px;">
+                    <!-- Demo link - you can replace this with your actual affiliate or hosting link -->
+                    <a href="https://infinityfree.net" target="_blank" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;">Register for Free Hosting <i class="fa-solid fa-external-link-alt" style="margin-left: 8px; font-size: 0.9rem;"></i></a>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 15px;">* Links to our recommended free hosting partner platform.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. FAQ SECTION -->
+        <section class="section">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header center">
+                    <span class="subtitle">Clarity</span>
+                    <h2 class="title">Frequently Asked Questions</h2>
+                </div>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    
+                    <details>
+                        <summary>Is it really 100% free?</summary>
+                        <div class="faq-content">Yes! The hosting plans recommended here are completely free for students and beginners. You don't need a credit card to sign up.</div>
+                    </details>
+                    
+                    <details>
+                        <summary>Can I practice GTM and Pixel tracking here?</summary>
+                        <div class="faq-content">Absolutely. Since you get full access to the WordPress dashboard and theme files, you can easily insert Google Tag Manager, Meta Pixel, and practice conversion tracking.</div>
+                    </details>
+                    
+                    <details>
+                        <summary>Can I use my own domain name?</summary>
+                        <div class="faq-content">Yes, you can buy a domain from Namecheap or GoDaddy and point the nameservers to this free hosting account to make it look completely professional.</div>
+                    </details>
+
+                    <details>
+                        <summary>Is this hosting good for a real client business?</summary>
+                        <div class="faq-content">No. Free hosting is meant for practice, portfolios, and testing. For a real business or e-commerce store, I always recommend purchasing a premium, high-speed hosting provider.</div>
+                    </details>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= START OF UNIVERSAL FOOTER ================= -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-block;">Rahmat<span>.</span></a>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Digital Marketing Strategist & SEO Expert.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html#seo">SEO Optimization</a></li>
+                    <li><a href="services.html#google-ads">Paid Advertising</a></li>
+                    <li><a href="services.html#analytics">Analytics & Tracking</a></li>
+                    <li><a href="services.html#web-dev">Web Development</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                    <li><a href="mailto:rahmatullah.dms@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Rahmat Ullah. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- ================= END OF UNIVERSAL FOOTER ================= -->
+
+    <!-- FLOATING BUTTONS -->
+    <a href="https://wa.me/8801613112746" target="_blank" class="floating-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <div class="floating-chatbot" onclick="alert('AI Assistant is coming soon!')">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 50 });
+    </script>
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses | Rahmat Ullah - Digital Marketing Mentorship</title>
+    
+    <meta name="description" content="Master practical digital marketing skills. Explore structured learning paths across SEO, paid advertising, and analytics by Rahmat Ullah.">
+    
+    <!-- Fonts, Icons & AOS CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- Courses Page Specific Styles -->
+    <style>
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 30px;
+        }
+        .course-card {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--glass-border);
+            padding: 0 !important; /* Image will go edge-to-edge */
+            overflow: hidden;
+        }
+        .course-img {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .course-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .course-card:hover .course-img img {
+            transform: scale(1.05);
+        }
+        .course-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .course-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .course-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .featured-course {
+            border: 1px solid var(--primary-color);
+            background: linear-gradient(145deg, rgba(0, 200, 150, 0.05) 0%, rgba(0,0,0,0) 100%);
+            box-shadow: 0 10px 40px rgba(0, 200, 150, 0.1);
+            overflow: hidden;
+        }
+        
+        /* Guide Table */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .guide-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--surface-color);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .guide-row:hover {
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+        @media (max-width: 768px) {
+            .guide-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+        }
+
+        /* FAQ Accordion */
+        details {
+            background: var(--surface-color);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        summary {
+            padding: 18px 20px;
+            font-weight: 500;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        details[open] summary::after { transform: rotate(180deg); }
+        .faq-content {
+            padding: 0 20px 20px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        /* Instructor Highlight Stats */
+        .stat-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .stat-box i { font-size: 1.8rem; color: var(--primary-color); }
+
+
+        /* =========================================
+           MOBILE RESPONSIVENESS FIXES
+           ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Fix Featured Course Card */
+            .featured-course {
+                grid-template-columns: 1fr !important; /* Force single column */
+            }
+            .featured-course > div:first-child {
+                padding: 25px !important; /* Adjust padding for mobile */
+            }
+            .featured-course > div:last-child {
+                min-height: 250px;
+                order: -1; /* Brings the image to the top on mobile */
+            }
+            
+            /* 2. Fix Instructor Section */
+            #instructor .container {
+                grid-template-columns: 1fr !important; /* Force single column */
+                gap: 2rem !important;
+            }
+            
+            /* 3. Adjust Stat Boxes for smaller screens */
+            .stat-box {
+                padding: 10px;
+                gap: 10px;
+            }
+            .stat-box i {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= START OF UNIVERSAL HEADER ================= -->
+    <header class="header" id="header">
+        <nav class="navbar container">
+            <a href="index.html" class="logo">Rahmat<span>.</span></a>
+            <div class="nav-menu mobile-only-hide" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="about.html">About Me</a>
+                            <a href="about.html#skills">Skills & Tools</a>
+                            <a href="about.html#certifications">Certifications</a>
+                            <a href="about.html#training">Training</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="services.html" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="services.html#seo">SEO</a>
+                            <a href="services.html#google-ads">Google Ads</a>
+                            <a href="services.html#meta-ads">Meta Ads</a>
+                            <a href="services.html#analytics">Analytics & Tracking</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
+                    <li class="nav-item"><a href="courses.html" class="nav-link active">Courses</a></li>
+                    <li class="nav-item"><a href="free-hosting.html" class="nav-link">free-hosting</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">contact</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions mobile-only-hide">
+                <button class="theme-toggle" id="theme-button"><i class="fa-regular fa-sun" id="theme-icon"></i></button>
+                <a href="contact.html" class="btn btn-primary btn-transparent-hover">Let's Talk</a>
+            </div>
+        </nav>
+    </header>
+    <!-- ================= END OF UNIVERSAL HEADER ================= -->
+
+    <!-- MOBILE APP BOTTOM BAR & OVERLAY -->
+    <div class="bottom-app-bar mobile-only">
+        <a href="index.html" class="app-bar-item"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="services.html" class="app-bar-item"><i class="fa-solid fa-briefcase"></i>Services</a>
+        <a href="courses.html" class="app-bar-item active"><i class="fa-solid fa-graduation-cap"></i>Courses</a>
+        <a href="contact.html" class="app-bar-item"><i class="fa-solid fa-paper-plane"></i>Contact</a>
+        <div class="app-bar-item" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i>Menu</div>
+    </div>
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <i class="fa-solid fa-xmark close-menu" id="close-menu"></i>
+        <div class="mobile-menu-list">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Me</a>
+            <a href="services.html">Services</a>
+            <a href="projects.html">Projects</a>
+            <a href="courses.html" style="color: var(--primary-color);">Courses</a>
+            <a href="free-hosting.html">free-hosting</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">contact</a>
+        </div>
+    </div>
+
+    <main class="main">
+
+        <!-- 1. HERO SECTION -->
+        <section class="section" style="padding-top: 150px; background: linear-gradient(to bottom, var(--bg-color), var(--surface-color));">
+            <div class="container center" data-aos="fade-up">
+                <h1 class="title" style="font-size: clamp(2.5rem, 5vw, 4rem); max-width: 900px; margin: 0 auto 20px;">Develop Skills You Can <br><span style="color: var(--primary-color);">Actually Apply.</span></h1>
+                <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px; line-height: 1.6;">
+                    Explore structured digital marketing training focused on practical application, strategy, and measurable outcomes. Build the confidence to execute real-world campaigns.
+                </p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="#discovery" class="btn btn-primary">Explore Learning Paths <i class="fa-solid fa-arrow-down" style="margin-left: 8px;"></i></a>
+                    <a href="#instructor" class="btn btn-secondary">Meet Your Mentor</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. COURSE DISCOVERY -->
+        <section class="section" id="discovery">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header center">
+                    <span class="subtitle">Learning Paths</span>
+                    <h2 class="title">Which skill do you want to build?</h2>
+                    <p style="color: var(--text-muted); font-size: 1rem; margin-top: 10px;">Select a path based on your professional goals.</p>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px;">
+                    <span class="badge" style="padding: 10px 20px; font-size: 0.95rem; background: var(--surface-color); border: 1px solid var(--glass-border);">Paid Search & Campaigns</span>
+                    <span class="badge" style="padding: 10px 20px; font-size: 0.95rem; background: var(--surface-color); border: 1px solid var(--glass-border);">Social Ads & Lead Gen</span>
+                    <span class="badge" style="padding: 10px 20px; font-size: 0.95rem; background: var(--surface-color); border: 1px solid var(--glass-border);">Analytics & Data</span>
+                    <span class="badge" style="padding: 10px 20px; font-size: 0.95rem; background: var(--surface-color); border: 1px solid var(--glass-border);">Organic Visibility (SEO)</span>
+                    <span class="badge" style="padding: 10px 20px; font-size: 0.95rem; background: rgba(0, 200, 150, 0.1); border: 1px solid var(--primary-color); color: var(--primary-color);">Comprehensive Digital Marketing</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. FEATURED COURSE (AI-DRIVEN) -->
+        <section class="section" style="padding-top: 0;">
+            <div class="container" data-aos="fade-up">
+                <div class="glass-card featured-course" style="padding: 0; display: grid; grid-template-columns: 1.2fr 1fr; align-items: stretch;">
+                    <div style="padding: 40px; display: flex; flex-direction: column; justify-content: center;">
+                        <span class="badge" style="background: var(--primary-color); color: #fff; margin-bottom: 15px; width: max-content;"><i class="fa-solid fa-star"></i> Flagship Program</span>
+                        <h2 style="font-size: 2.2rem; margin-bottom: 15px;">AI-Driven Full Digital Marketing</h2>
+                        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+                            A comprehensive learning path for modern digital marketing. Learn how to connect AI workflows, SEO, paid advertising, and advanced analytics into one cohesive strategy.
+                        </p>
+                        <div class="course-meta" style="border: none; padding: 0;">
+                            <span><i class="fa-regular fa-clock" style="color: var(--primary-color);"></i> Comprehensive Path</span>
+                            <span><i class="fa-solid fa-signal" style="color: var(--primary-color);"></i> Beginner to Advanced</span>
+                        </div>
+                        <div style="margin-top: 25px;">
+                            <a href="#" class="btn btn-primary">Explore Full Curriculum <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- Added Featured Course Image -->
+                    <div style="background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover; border-left: 1px solid var(--glass-border);">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. INDIVIDUAL COURSE CARDS (WITH IMAGES & ICONS) -->
+        <section class="section" style="padding-top: 0;">
+            <div class="container" data-aos="fade-up">
+                <div class="course-grid">
+                    
+                    <!-- Google Ads -->
+                    <div class="glass-card card-flat-hover course-card">
+                        <div class="course-img">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Google Ads Mastery" loading="lazy">
+                        </div>
+                        <div class="course-body">
+                            <span class="card-category" style="color: #38bdf8; font-weight: 600; font-size: 0.85rem; margin-bottom: 10px;"><i class="fa-brands fa-google"></i> Paid Advertising</span>
+                            <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Google Ads Mastery</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; flex-grow: 1;">
+                                Learn how to plan, launch, track and optimize Google Ads campaigns with a practical focus on measurable business outcomes.
+                            </p>
+                            <div class="course-meta">
+                                <span><i class="fa-solid fa-signal"></i> Intermediate</span>
+                                <span><i class="fa-solid fa-laptop"></i> Online</span>
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+                                <span class="badge" style="font-size: 0.75rem;">Search Ads</span>
+                                <span class="badge" style="font-size: 0.75rem;">Campaign Optimization</span>
+                            </div>
+                            <a href="#" class="btn btn-secondary" style="text-align: center;">Enroll Now &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Meta Ads -->
+                    <div class="glass-card card-flat-hover course-card">
+                        <div class="course-img">
+                            <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Meta Ads & Lead Gen" loading="lazy">
+                        </div>
+                        <div class="course-body">
+                            <span class="card-category" style="color: #8b5cf6; font-weight: 600; font-size: 0.85rem; margin-bottom: 10px;"><i class="fa-brands fa-meta"></i> Social & Lead Gen</span>
+                            <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Meta Ads & Lead Gen</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; flex-grow: 1;">
+                                Understand how to build conversion-focused Facebook and Instagram campaigns, target the right audience, and optimize for Cost Per Lead.
+                            </p>
+                            <div class="course-meta">
+                                <span><i class="fa-solid fa-signal"></i> Intermediate</span>
+                                <span><i class="fa-solid fa-laptop"></i> Online</span>
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+                                <span class="badge" style="font-size: 0.75rem;">Facebook Ads</span>
+                                <span class="badge" style="font-size: 0.75rem;">Lead Generation</span>
+                            </div>
+                            <a href="#" class="btn btn-secondary" style="text-align: center;">Enroll Now &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Server-Side Tracking -->
+                    <div class="glass-card card-flat-hover course-card">
+                        <div class="course-img">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Server-Side Tracking" loading="lazy">
+                        </div>
+                        <div class="course-body">
+                            <span class="card-category" style="color: #10b981; font-weight: 600; font-size: 0.85rem; margin-bottom: 10px;"><i class="fa-solid fa-server"></i> Analytics & Data</span>
+                            <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Server-Side Tracking</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; flex-grow: 1;">
+                                Master modern analytics infrastructure. Learn how to configure GA4, GTM, and Meta CAPI to accurately measure campaign performance.
+                            </p>
+                            <div class="course-meta">
+                                <span><i class="fa-solid fa-signal"></i> Advanced</span>
+                                <span><i class="fa-solid fa-laptop"></i> Online</span>
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+                                <span class="badge" style="font-size: 0.75rem;">GTM & GA4</span>
+                                <span class="badge" style="font-size: 0.75rem;">Meta CAPI</span>
+                            </div>
+                            <a href="#" class="btn btn-secondary" style="text-align: center;">Enroll Now &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Local SEO -->
+                    <div class="glass-card card-flat-hover course-card">
+                        <div class="course-img">
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Local SEO & GBP" loading="lazy">
+                        </div>
+                        <div class="course-body">
+                            <span class="card-category" style="color: #f59e0b; font-weight: 600; font-size: 0.85rem; margin-bottom: 10px;"><i class="fa-solid fa-map-location-dot"></i> Organic Search</span>
+                            <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Local SEO & GBP</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; flex-grow: 1;">
+                                Learn practical strategies to dominate local search results and optimize Google Business Profiles for physical businesses.
+                            </p>
+                            <div class="course-meta">
+                                <span><i class="fa-solid fa-signal"></i> All Levels</span>
+                                <span><i class="fa-solid fa-laptop"></i> Online</span>
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+                                <span class="badge" style="font-size: 0.75rem;">Local SEO</span>
+                                <span class="badge" style="font-size: 0.75rem;">Google Maps</span>
+                            </div>
+                            <a href="#" class="btn btn-secondary" style="text-align: center;">Enroll Now &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Website SEO -->
+                    <div class="glass-card card-flat-hover course-card">
+                        <div class="course-img">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Website SEO" loading="lazy">
+                        </div>
+                        <div class="course-body">
+                            <span class="card-category" style="color: #f59e0b; font-weight: 600; font-size: 0.85rem; margin-bottom: 10px;"><i class="fa-solid fa-magnifying-glass-chart"></i> Organic Search</span>
+                            <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Website SEO</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; flex-grow: 1;">
+                                Understand technical architecture, keyword mapping, and content optimization to improve organic search visibility on Google.
+                            </p>
+                            <div class="course-meta">
+                                <span><i class="fa-solid fa-signal"></i> Intermediate</span>
+                                <span><i class="fa-solid fa-laptop"></i> Online</span>
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+                                <span class="badge" style="font-size: 0.75rem;">Technical SEO</span>
+                                <span class="badge" style="font-size: 0.75rem;">On-Page</span>
+                            </div>
+                            <a href="#" class="btn btn-secondary" style="text-align: center;">Enroll Now &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- YouTube SEO -->
+                    <div class="glass-card card-flat-hover course-card">
+                        <div class="course-img">
+                            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="YouTube SEO" loading="lazy">
+                        </div>
+                        <div class="course-body">
+                            <span class="card-category" style="color: #ef4444; font-weight: 600; font-size: 0.85rem; margin-bottom: 10px;"><i class="fa-brands fa-youtube"></i> Video Marketing</span>
+                            <h3 style="font-size: 1.4rem; margin-bottom: 15px;">YouTube SEO</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; flex-grow: 1;">
+                                Learn how to optimize video metadata, understand search intent, and improve YouTube search visibility and channel discoverability.
+                            </p>
+                            <div class="course-meta">
+                                <span><i class="fa-solid fa-signal"></i> All Levels</span>
+                                <span><i class="fa-solid fa-laptop"></i> Online</span>
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+                                <span class="badge" style="font-size: 0.75rem;">Video SEO</span>
+                                <span class="badge" style="font-size: 0.75rem;">Channel Growth</span>
+                            </div>
+                            <a href="#" class="btn btn-secondary" style="text-align: center;">Enroll Now &rarr;</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. INSTRUCTOR & CREDIBILITY SECTION (FULLY UPDATED) -->
+        <section class="section" id="instructor" style="background: var(--surface-color); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+            <div class="container" style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; align-items: center;" data-aos="fade-up">
+                <!-- Mentor Image (Placeholder - easily replaceable) -->
+                <div class="floating-img" style="position: relative;">
+                    <div style="position: absolute; top: 20px; left: -20px; width: 100%; height: 100%; border: 2px solid var(--primary-color); border-radius: 16px; z-index: 0;"></div>
+                    <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rahmat Ullah - Mentor" style="width: 100%; border-radius: 16px; position: relative; z-index: 1; box-shadow: 0 15px 30px rgba(0,0,0,0.4);">
+                </div>
+                
+                <div>
+                    <span class="subtitle">Your Mentor</span>
+                    <h2 class="title" style="margin-bottom: 10px;">Meet Rahmat Ullah</h2>
+                    <h3 style="color: var(--primary-color); font-size: 1.2rem; font-weight: 500; margin-bottom: 20px;">Digital Marketing Strategist & Senior Mentor</h3>
+                    
+                    <p style="color: var(--text-muted); margin-bottom: 15px; line-height: 1.6;">
+                        I am not just a theoretician; I am an active industry practitioner. From managing high-ticket international clients in Ireland through Upwork and Fiverr, to optimizing local business revenue—I bring real-world marketplace data directly into the classroom.
+                    </p>
+                    <p style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.6;">
+                        Currently serving as an Associate Trainer under the SICIP-BACCO program and a Senior Mentor at European IT. Having trained hundreds of students across massive ASSET and NHRDF government projects, my goal is simple: <strong>to build your competency, not just your vocabulary.</strong>
+                    </p>
+                    
+                    <!-- Credibility Highlights -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="stat-box">
+                            <i class="fa-solid fa-users"></i>
+                            <div>
+                                <h4 style="font-size: 1.1rem; color: var(--text-primary);">500+</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-muted);">Students Trained</p>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fa-solid fa-certificate"></i>
+                            <div>
+                                <h4 style="font-size: 1.1rem; color: var(--text-primary);">Certified</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-muted);">NSDA & CBT&A</p>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fa-solid fa-globe"></i>
+                            <div>
+                                <h4 style="font-size: 1.1rem; color: var(--text-primary);">Active</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-muted);">Global Freelancer</p>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <div>
+                                <h4 style="font-size: 1.1rem; color: var(--text-primary);">Mentor</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-muted);">Corporate & Govt.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. COURSE SELECTION GUIDE -->
+        <section class="section">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header center">
+                    <span class="subtitle">Decision Guide</span>
+                    <h2 class="title">Which course should I choose?</h2>
+                    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Select the path that directly aligns with your current objective.</p>
+                </div>
+                
+                <div class="guide-grid" style="max-width: 800px; margin: 30px auto 0;">
+                    <div class="guide-row">
+                        <span style="color: var(--text-primary); font-weight: 500;">If you want to master Google advertising...</span>
+                        <a href="#" style="color: var(--primary-color); font-weight: 600; text-decoration: none;">&rarr; Google Ads</a>
+                    </div>
+                    <div class="guide-row">
+                        <span style="color: var(--text-primary); font-weight: 500;">If you want to generate leads via FB/IG...</span>
+                        <a href="#" style="color: var(--primary-color); font-weight: 600; text-decoration: none;">&rarr; Meta Ads</a>
+                    </div>
+                    <div class="guide-row">
+                        <span style="color: var(--text-primary); font-weight: 500;">If you want to understand modern data tracking...</span>
+                        <a href="#" style="color: var(--primary-color); font-weight: 600; text-decoration: none;">&rarr; Server-Side Tracking</a>
+                    </div>
+                    <div class="guide-row">
+                        <span style="color: var(--text-primary); font-weight: 500;">If you want to improve organic website rankings...</span>
+                        <a href="#" style="color: var(--primary-color); font-weight: 600; text-decoration: none;">&rarr; Website SEO</a>
+                    </div>
+                    <div class="guide-row">
+                        <span style="color: var(--text-primary); font-weight: 500;">If you want to learn digital marketing comprehensively...</span>
+                        <a href="#" style="color: var(--primary-color); font-weight: 600; text-decoration: none;">&rarr; AI-Driven Full Digital Marketing</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. EXPANDED FAQ SECTION -->
+        <section class="section" style="padding-top: 20px;">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header center">
+                    <span class="subtitle">Clarity</span>
+                    <h2 class="title">Common Questions</h2>
+                </div>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    
+                    <details>
+                        <summary>Which course should I start with?</summary>
+                        <div class="faq-content">If you are completely new to the industry, I highly recommend starting with the "AI-Driven Full Digital Marketing" course to build a strong foundation across all channels. If you already have experience and want to specialize, choose the specific path (like Meta Ads or Server-Side Tracking) that matches your career goal.</div>
+                    </details>
+                    
+                    <details>
+                        <summary>Do I need previous digital marketing experience?</summary>
+                        <div class="faq-content">No previous experience is required for the beginner-friendly courses like Website SEO or Local SEO. However, advanced modules like "Server-Side Tracking" require a basic understanding of how pixels and website analytics function.</div>
+                    </details>
+                    
+                    <details>
+                        <summary>Is the training practical?</summary>
+                        <div class="faq-content">Absolutely. The core philosophy of my training is "Understand → Practice → Implement." We do not rely on just theory. You will work inside the actual tools (GA4, GTM, Meta Ads Manager, Google Ads) and execute strategies based on real-world scenarios.</div>
+                    </details>
+                    
+                    <details>
+                        <summary>How long is each course and what is the format?</summary>
+                        <div class="faq-content">Course duration varies depending on the topic. Specialized courses can be completed in a few weeks, while the comprehensive Masterclass is a multi-month journey. Click "Enroll Now" on any course to see the detailed curriculum, class schedule, and format (Live or Pre-recorded).</div>
+                    </details>
+                    
+                    <details>
+                        <summary>How does payment and enrollment work?</summary>
+                        <div class="faq-content">When you click on "Enroll Now," you will be redirected to the secure external course landing page. There you can view all available payment gateways, pricing plans, and complete your registration seamlessly.</div>
+                    </details>
+
+                    <details>
+                        <summary>How do I access the course after enrollment?</summary>
+                        <div class="faq-content">Upon successful enrollment, you will receive an immediate confirmation email containing your login credentials and instructions on how to access the learning portal, community groups, and class links.</div>
+                    </details>
+                    
+                    <details>
+                        <summary>Is this suitable for freelancers or business owners?</summary>
+                        <div class="faq-content">Both! Freelancers will learn the exact execution skills needed to offer high-paying services on Upwork and Fiverr. Business owners will learn the strategy and metrics needed to oversee their own growth and stop relying blindly on agencies.</div>
+                    </details>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. FINAL CTA -->
+        <section class="section" style="text-align: center; padding: 100px 20px; background: linear-gradient(180deg, var(--bg-color) 0%, var(--surface-color) 100%);">
+            <div class="container" data-aos="zoom-in">
+                <h2 class="title" style="font-size: 2.5rem;">Ready to Build Your Digital Marketing Skills?</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 30px; font-size: 1.1rem;">Choose the learning path that matches your goals and explore the full course details before deciding.</p>
+                <a href="#discovery" class="btn btn-primary" style="padding: 16px 40px; font-size: 1.1rem;">Explore Courses <i class="fa-solid fa-arrow-up" style="margin-left: 8px;"></i></a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= START OF UNIVERSAL FOOTER ================= -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-block;">Rahmat<span>.</span></a>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Digital Marketing Strategist & SEO Expert.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html#seo">SEO Optimization</a></li>
+                    <li><a href="services.html#google-ads">Paid Advertising</a></li>
+                    <li><a href="services.html#analytics">Analytics & Tracking</a></li>
+                    <li><a href="services.html#web-dev">Web Development</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                    <li><a href="mailto:hello@rahmatullah.com"><i class="fa-solid fa-envelope"></i> Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Rahmat Ullah. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- ================= END OF UNIVERSAL FOOTER ================= -->
+
+    <!-- FLOATING BUTTONS -->
+    <a href="https://wa.me/8801700000000" target="_blank" class="floating-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <div class="floating-chatbot" onclick="alert('AI Assistant is coming soon!')">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 50 });
+    </script>
+</body>
+</html>

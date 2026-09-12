@@ -1,0 +1,405 @@
+/* =========================================
+   RESPONSIVE LAYOUT & MOBILE APP MENU
+   ========================================= */
+
+/* --- Desktop only elements --- */
+.mobile-only {
+    display: none;
+}
+
+/* =========================================
+   GLOBAL OVERFLOW FIX
+   ========================================= */
+html, body {
+    overflow-x: hidden; /* ডানে-বামে স্ক্রল হওয়া এবং কন্টেন্ট কেটে যাওয়া বন্ধ করবে */
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    /* --- Hide desktop nav links & standard actions on mobile --- */
+    .nav-list, .nav-actions { display: none; }
+    .mobile-only { display: flex; }
+    
+    /* --- Header Adjustment for Mobile --- */
+    .header {
+        height: 70px;
+        justify-content: center;
+    }
+    .navbar { justify-content: center; }
+
+    /* --- 1. Fixed Bottom App Bar --- */
+    .bottom-app-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 70px;
+        background: var(--glass-bg);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border-top: 1px solid var(--glass-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        padding: 0;
+        margin: 0;
+        padding-bottom: env(safe-area-inset-bottom); /* For iPhones */
+    }
+
+    .app-bar-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        font-weight: 500;
+        width: 20%; /* ৫টি বাটন সমান জায়গা নেবে */
+        cursor: pointer;
+    }
+
+    .app-bar-item i {
+        font-size: 1.25rem;
+        transition: transform var(--transition-fast);
+    }
+
+    .app-bar-item.active, .app-bar-item:hover {
+        color: var(--primary-color);
+    }
+    .app-bar-item.active i {
+        transform: translateY(-2px);
+    }
+
+    /* Special Floating Action Button in Bottom Menu (If used) */
+    .app-bar-cta {
+        position: relative;
+        top: -15px;
+        width: 50px;
+        height: 50px;
+        background: var(--primary-color);
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow: var(--shadow-glow);
+    }
+
+    /* --- 2. Resize Floating Buttons & Keep them Sticky --- */
+    .floating-whatsapp {
+        right: 15px !important;
+        bottom: 85px !important;
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 1.5rem !important;
+        position: fixed !important;
+    }
+    .floating-chatbot {
+        left: 15px !important;
+        bottom: 85px !important;
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 1.2rem !important;
+        position: fixed !important;
+    }
+
+
+
+
+    /* --- 3. Fix Footer Responsiveness (2-Column Layout) --- */
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr) !important; 
+        gap: 2rem 1rem !important; 
+        text-align: left !important; 
+    }
+    
+    .footer-col:nth-child(1) {
+        grid-column: span 2; 
+        text-align: center;
+    }
+
+    /* ৩ নম্বর কলাম (Services) মোবাইলে হাইড করার জন্য */
+    .footer-col:nth-child(3) {
+        display: none !important;
+    }
+    
+    .footer-col ul {
+        align-items: flex-start !important;
+    }
+    
+    .footer {
+        padding-bottom: 90px; 
+    }
+    .footer-bottom {
+        padding-bottom: 90px !important; 
+    }
+
+
+
+
+
+
+    /* --- Fix Inline Grids for Mobile --- */
+    [style*="grid-template-columns: 1fr 1fr"],
+    [style*="grid-template-columns: 1fr 1.5fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
+    /* --- Hero Section Mobile Fix --- */
+    .hero {
+        padding-top: 100px !important;
+        text-align: center;
+    }
+    .hero .container {
+        display: flex !important;
+        flex-direction: column;
+    }
+    .hero-content { 
+        order: 2; 
+        font-size: 1rem;
+    }
+    .hero-image { 
+        order: 1; 
+        margin-bottom: 20px;
+        margin-top: 50px; 
+    }
+    .hero-content p { 
+        margin-left: auto; 
+        margin-right: auto;
+        padding-top: 20px;
+    }
+    .hero-content div { 
+        justify-content: center; 
+    }
+    .hero .title { 
+        font-size: 2.2rem !important; 
+    }
+    
+    /* --- Fix Hero Typing Text Overlap --- */
+    .hero h2 {
+        height: auto !important; /* ফিক্সড হাইট বাতিল করবে */
+        min-height: 90px; /* লেখা টাইপ হওয়ার সময় যেন স্ক্রিন না লাফায় */
+        font-size: 1.5rem !important; /* মোবাইলে ফন্ট সাইজ একটু ছোট করে সুন্দর করবে */
+        line-height: 1.4;
+        margin-bottom: 25px !important;
+    }
+
+    /* --- Mobile Full Screen Menu Overlay --- */
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background: var(--bg-color);
+        z-index: 1001;
+        transition: var(--transition-normal);
+        padding: 80px 20px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    .mobile-menu-overlay.active { left: 0; }
+    
+    .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 1.5rem;
+        color: var(--text-primary);
+        cursor: pointer;
+    }
+    
+    .mobile-menu-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    /* --- 4. Reduce Section Spacing (অপ্রয়োজনীয় গ্যাপ কমানো) --- */
+    .section {
+        padding: 40px 0 !important; /* সেকশনগুলোর মাঝখানের বিশাল স্পেস কমিয়ে আনবে */
+    }
+    .section-header {
+        margin-bottom: 25px !important;
+    }
+    .title {
+        font-size: 1.8rem !important; /* সেকশন টাইটেলগুলো একটু ছোট হবে */
+    }
+
+    /* --- 5. Make Buttons Smaller (বাটন ছোট করা) --- */
+    .btn {
+        padding: 10px 20px !important;
+        font-size: 0.9rem !important;
+    }
+
+
+
+
+
+    /* --- 6. Make Cards 2-Column & Smaller (২ কলাম কার্ড এবং ছোট ছবি) --- */
+    /* যেসব গ্রিডে অনেক কার্ড আছে, সেগুলোকে জোর করে ২ কলাম করবে */
+    div[style*="grid-template-columns: repeat(auto-fit"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+    }
+    
+    /* কার্ডের ভেতরের প্যাডিং এবং স্পেস কমানো */
+    .glass-card {
+        padding: 15px !important;
+    }
+    .glass-card h3, .glass-card h4 {
+        font-size: 1rem !important;
+        margin-bottom: 8px !important;
+    }
+    .glass-card p {
+        font-size: 0.75rem !important; /* প্যারাগ্রাফ ছোট করে মানানসই করা */
+        margin-bottom: 10px !important;
+        line-height: 1.3;
+    }
+    .glass-card i {
+        font-size: 1.5rem !important; /* আইকন ছোট করা */
+        margin-bottom: 10px !important;
+    }
+    
+    /* কার্ডের ভেতরের ছবিগুলো ছোট করা */
+    .glass-card img {
+        height: 100px !important; /* ছবির সাইজ কমিয়ে ব্যালেন্স করা */
+        object-fit: cover;
+    }
+
+    /* রেজাল্ট/ইমপ্যাক্ট সেকশনের বড় নাম্বারগুলো ছোট করা */
+    .glass-card h3[style*="font-size: 3rem"] {
+        font-size: 1.8rem !important;
+    }
+
+
+
+
+
+    /* --- Fix Squished Buttons in Mobile Cards --- */
+    .glass-card .btn {
+        width: 100% !important; /* বাটনটি কার্ডের পুরো জায়গা নেবে */
+        padding: 8px 5px !important; /* প্যাডিং কমিয়ে ব্যালেন্স করা */
+        font-size: 0.8rem !important; /* টেক্সট সাইজ পারফেক্ট করা */
+        border-radius: 8px !important; /* অদ্ভুত গোল শেপ বাতিল করে সুন্দর রাউন্ডেড শেপ দেবে */
+        line-height: 1.2 !important;
+        margin-top: 5px !important;
+    }
+
+    /* Course Image Fix for Mobile */
+    .glass-card img {
+        height: 120px !important; /* ছবি আরেকটু বড় করে সুন্দর লুক দেবে */
+        width: 100% !important;
+        border-radius: 6px !important; 
+    }
+
+
+
+    /* --- Fix Project Badges & Blog Text in Mobile Cards --- */
+    
+    /* প্রজেক্ট কার্ডের ব্যাজ (Badge) ফিক্স করা */
+    .glass-card .badge {
+        width: auto !important; /* ব্যাজগুলো যেন পুরো জায়গা না নেয় */
+        display: inline-block !important; /* টেক্সটের সাথে মানানসই হবে */
+        padding: 4px 10px !important; /* প্যাডিং কমিয়ে ছোট করা হলো */
+        font-size: 0.7rem !important; /* ফন্ট সাইজ ছোট করা হলো */
+        border-radius: 4px !important; /* গোল শেপ থেকে সুন্দর চারকোনা শেপ */
+        line-height: 1.2 !important;
+        margin-bottom: 8px !important;
+    }
+
+    /* ব্লগ কার্ডের "Read More" লিংক ফিক্স করা */
+    .glass-card a {
+        display: inline-block;
+        font-size: 0.8rem !important; /* ফন্ট সাইজ ছোট করা হলো */
+        line-height: 1.2 !important;
+        white-space: nowrap; /* টেক্সট যেন ভেঙে নিচে না যায় */
+        margin-top: 5px;
+    }
+
+    /* কার্ডের ভেতরের টাইটেল (h3) ফিক্স করা */
+    .glass-card h3 {
+        font-size: 0.9rem !important; /* টাইটেল আরেকটু ছোট করা হলো */
+        line-height: 1.3 !important;
+        margin-bottom: 5px !important;
+        /* যদি টাইটেল খুব বড় হয়, তবে ভেঙে যেন দেখতে খারাপ না লাগে */
+        word-wrap: break-word; 
+    }
+
+    /* কার্ডের ভেতরের প্যারাগ্রাফ ফিক্স করা */
+    .glass-card p {
+        font-size: 0.75rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 10px !important;
+    }
+
+
+
+
+
+    /* --- Fix Card Cut-off / Overflow Issue --- */
+    div[style*="grid-template-columns: repeat(auto-fit"] {
+        width: 100% !important; /* গ্রিড যেন কোনোভাবেই স্ক্রিনের বাইরে না যায় */
+    }
+    
+    .glass-card {
+        overflow: hidden !important; /* কার্ডের ভেতরের কন্টেন্ট কার্ডকে ডানে ঠেলতে পারবে না */
+    }
+    
+    .glass-card .btn {
+        white-space: normal !important; /* বাটনের টেক্সট জায়গা না পেলে সুন্দর করে ২ লাইনে ভাঙবে, কিন্তু কার্ড কাটবে না */
+        font-size: 0.75rem !important; /* সাইজ আরেকটু ব্যালেন্স করা হলো */
+        padding: 8px 4px !important;
+    }
+
+
+
+
+    /* --- Fix Testimonial Avatar Images --- */
+    .swiper-slide.glass-card img {
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 50% !important; /* ছবিকে আবার গোল করবে */
+        min-width: 50px !important; /* ছবি যেন কোনোভাবেই লম্বা বা চ্যাপ্টা না হয় */
+        flex-shrink: 0; 
+        object-fit: cover !important;
+    }
+
+
+
+
+
+    /* --- Fix Pricing Cards For Mobile (Services Page) --- */
+    .pricing-grid {
+        grid-template-columns: 1fr !important; /* জোর করে এক কলামে আনবে */
+        align-items: stretch !important; /* কার্ড যেন বামে চেপে না যায় */
+        gap: 2.5rem !important; 
+    }
+    .pricing-card {
+        width: 100% !important; 
+        margin-top: 15px !important; /* উপরের ব্যাজ যেন না কাটে */
+    }
+    .highlighted-card {
+        transform: none !important; /* মোবাইলে অতিরিক্ত জুম বন্ধ করা হলো */
+    }
+    /* লিস্টের টেক্সট যেন না ভাঙে তার জন্য Flexbox */
+    .pricing-list li {
+        display: flex !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        line-height: 1.6 !important;
+        margin-bottom: 12px !important;
+    }
+    .pricing-list li i {
+        margin-top: 5px;
+        min-width: 25px; /* আইকনের জায়গা ফিক্স করে দেওয়া হলো */
+    }
+}

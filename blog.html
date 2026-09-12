@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Digital Marketing Insights by Rahmat Ullah</title>
+    
+    <meta name="description" content="Explore actionable digital marketing strategies, SEO guides, paid advertising tips, and server-side tracking tutorials by Rahmat Ullah.">
+    <meta name="keywords" content="digital marketing blog, SEO tips, Google Ads guide, server-side tracking, Rahmat Ullah">
+    
+    <!-- Open Graph for Blog Homepage -->
+    <meta property="og:title" content="Digital Marketing Insights & Strategies">
+    <meta property="og:description" content="Deep dives into SEO, Paid Advertising, and Server-Side Tracking.">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts, Icons & AOS CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- Blog Specific Styles -->
+    <style>
+        /* Blog Filter System */
+        .filter-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+        }
+        .filter-btn {
+            background: var(--surface-color);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .filter-btn .count {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0, 200, 150, 0.2);
+        }
+        .filter-btn.active .count { background: rgba(0, 0, 0, 0.2); }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(0, 200, 150, 0.05);
+        }
+        .search-container i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+        }
+        @media (max-width: 768px) {
+            .blog-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Blog Card */
+        .blog-card {
+            background: var(--surface-color);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInCard 0.5s forwards ease-out;
+            text-decoration: none;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(0, 200, 150, 0.3);
+        }
+        @keyframes fadeInCard { to { opacity: 1; } }
+
+        .blog-img {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .blog-card:hover .blog-img img { transform: scale(1.05); }
+        
+        .blog-category-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .blog-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+        .blog-title {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            line-height: 1.4;
+            transition: color 0.3s;
+        }
+        .blog-card:hover .blog-title { color: var(--primary-color); }
+        
+        .blog-excerpt {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .read-more {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
+        }
+        .blog-card:hover .read-more { gap: 12px; }
+
+        /* Empty State */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--surface-color);
+            border-radius: 12px;
+            border: 1px dashed var(--glass-border);
+        }
+
+        /* =========================================
+           NEWSLETTER FORM RESPONSIVE FIX
+           ========================================= */
+        #subscribe-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .subscribe-input {
+            flex-grow: 1;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.03);
+            color: #fff;
+            outline: none;
+            width: 100%;
+        }
+        .subscribe-btn {
+            padding: 15px 30px;
+            white-space: nowrap; /* টেক্সট ভাঙতে দেবে না */
+        }
+
+        /* মোবাইলের জন্য (ওপর-নিচ করে দেবে) */
+        @media (max-width: 576px) {
+            #subscribe-form {
+                flex-direction: column !important;
+            }
+            .subscribe-btn {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= START OF UNIVERSAL HEADER ================= -->
+    <header class="header" id="header">
+        <nav class="navbar container">
+            <a href="index.html" class="logo">Rahmat<span>.</span></a>
+            <div class="nav-menu mobile-only-hide" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="about.html">About Me</a>
+                            <a href="about.html#skills">Skills & Tools</a>
+                            <a href="about.html#certifications">Certifications</a>
+                            <a href="about.html#training">Training</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="services.html" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="services.html#seo">SEO</a>
+                            <a href="services.html#google-ads">Google Ads</a>
+                            <a href="services.html#meta-ads">Meta Ads</a>
+                            <a href="services.html#analytics">Analytics & Tracking</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
+                    <li class="nav-item"><a href="courses.html" class="nav-link">Courses</a></li>
+                    <li class="nav-item"><a href="free-hosting.html" class="nav-link">free-hosting</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link active">Blog</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">contact</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions mobile-only-hide">
+                <button class="theme-toggle" id="theme-button"><i class="fa-regular fa-sun" id="theme-icon"></i></button>
+                <a href="contact.html" class="btn btn-primary btn-transparent-hover">Let's Talk</a>
+            </div>
+        </nav>
+    </header>
+    <!-- ================= END OF UNIVERSAL HEADER ================= -->
+     <!-- MOBILE APP BOTTOM BAR & OVERLAY -->
+    <div class="bottom-app-bar mobile-only">
+        <a href="index.html" class="app-bar-item"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="services.html" class="app-bar-item"><i class="fa-solid fa-briefcase"></i>Services</a>
+        <a href="courses.html" class="app-bar-item"><i class="fa-solid fa-graduation-cap"></i>Courses</a>
+        <a href="contact.html" class="app-bar-item"><i class="fa-solid fa-paper-plane"></i>Contact</a>
+        <div class="app-bar-item" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i>Menu</div>
+    </div>
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <i class="fa-solid fa-xmark close-menu" id="close-menu"></i>
+        <div class="mobile-menu-list">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Me</a>
+            <a href="services.html">Services</a>
+            <a href="projects.html">Projects</a>
+            <a href="courses.html">Courses</a>
+            <a href="free-hosting.html">free-hosting</a>
+            <a href="blog.html" style="color: var(--primary-color);">Blog</a>
+            <a href="contact.html">contact</a>
+        </div>
+    </div>
+
+    <main class="main">
+
+        <!-- 1. HERO SECTION -->
+        <section class="section" style="padding-top: 150px; background: linear-gradient(to bottom, var(--bg-color), var(--surface-color));">
+            <div class="container center" data-aos="fade-up">
+                <span class="subtitle">Insights & Strategies</span>
+                <h1 class="title" style="font-size: clamp(2.5rem, 5vw, 4rem); max-width: 900px; margin: 0 auto 20px;">Digital Marketing <br><span style="color: var(--primary-color);">Data-Driven Blog.</span></h1>
+                <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px; line-height: 1.6;">
+                    Deep dives into Technical SEO, Paid Advertising, Server-Side Tracking, and real-world marketing case studies to help you scale.
+                </p>
+                
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Search for SEO, Ads, Analytics...">
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. DYNAMIC BLOG SECTION -->
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                
+                <!-- Dynamic Filters (Counts injected via JS) -->
+                <div class="filter-nav" id="filter-nav" data-aos="fade-up">
+                    <button class="filter-btn active" data-filter="all">All <span class="count" id="count-all">0</span></button>
+                    <button class="filter-btn" data-filter="seo">SEO <span class="count" id="count-seo">0</span></button>
+                    <button class="filter-btn" data-filter="ads">Paid Ads <span class="count" id="count-ads">0</span></button>
+                    <button class="filter-btn" data-filter="tracking">Analytics & Tracking <span class="count" id="count-tracking">0</span></button>
+                    <button class="filter-btn" data-filter="ai">AI Marketing <span class="count" id="count-ai">0</span></button>
+                </div>
+
+                <!-- Centralized Blog Grid -->
+                <div class="blog-grid" id="blog-grid" data-aos="fade-up">
+                    <!-- Blog Cards will be generated dynamically by JavaScript here -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. NEWSLETTER CTA -->
+        <section class="section" style="text-align: center; padding: 100px 20px; background: linear-gradient(180deg, var(--bg-color) 0%, var(--surface-color) 100%); border-top: 1px solid var(--glass-border);">
+            <div class="container" data-aos="zoom-in">
+                <i class="fa-regular fa-envelope-open" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 20px;"></i>
+                <h2 class="title" style="font-size: 2.2rem;">Want the latest strategies in your inbox?</h2>
+                <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 30px; font-size: 1.05rem;">
+                    No spam. Just actionable SEO and marketing insights delivered once a month.
+                </p>
+                <form id="subscribe-form" onsubmit="event.preventDefault(); alert('Newsletter integration coming soon!');">
+                    <input type="email" required placeholder="Enter your email address" class="subscribe-input">
+                    <button type="submit" class="btn btn-primary subscribe-btn">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= START OF UNIVERSAL FOOTER ================= -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-block;">Rahmat<span>.</span></a>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Digital Marketing Strategist & SEO Expert.</p>
+            </div>
+            <!-- Standard Footer Navigation goes here (Skipped in snippet for brevity, keep your original footer) -->
+             <div class="footer-col">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html#seo">SEO Optimization</a></li>
+                    <li><a href="services.html#google-ads">Paid Advertising</a></li>
+                    <li><a href="services.html#analytics">Analytics & Tracking</a></li>
+                    <li><a href="services.html#web-dev">Web Development</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                    <li><a href="mailto:rahmatullah.dms@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Rahmat Ullah. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- ================= END OF UNIVERSAL FOOTER ================= -->
+     <!-- FLOATING BUTTONS -->
+    <a href="https://wa.me/8801613112746" target="_blank" class="floating-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <div class="floating-chatbot" onclick="alert('AI Assistant is coming soon!')">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <!-- CENTRALIZED BLOG DATA & LOGIC -->
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 50 });
+
+        /* =====================================================================
+           1. CENTRALIZED CONTENT SYSTEM
+           You only need to add a new object here to publish a new blog post!
+           ===================================================================== */
+        const blogPosts = [
+            {
+                id: "server-side-tracking-guide",
+                slug: "server-side-tracking-guide.html", // Future individual page link
+                title: "Server-Side Tracking: A Practical Guide for 2026",
+                excerpt: "Learn how server-side tracking works, why it matters post-iOS 14, and how it can improve modern conversion measurement.",
+                category: "tracking",
+                categoryLabel: "Analytics & Tracking",
+                date: "Sep 11, 2026",
+                readTime: "8 min read",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                imageAlt: "Server-side tracking concept data visualization",
+                tags: ["GTM", "GA4", "CAPI"]
+            },
+            {
+                id: "local-seo-ranking",
+                slug: "local-seo-ranking-guide.html",
+                title: "How to Dominate Local SEO & Google Maps in 2026",
+                excerpt: "A step-by-step framework to optimize your Google Business Profile, build citations, and rank in the local 3-pack.",
+                category: "seo",
+                categoryLabel: "SEO",
+                date: "Aug 25, 2026",
+                readTime: "6 min read",
+                image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                imageAlt: "Local SEO map targeting",
+                tags: ["Local SEO", "GBP"]
+            },
+            {
+                id: "google-ads-roas",
+                slug: "google-ads-roas.html",
+                title: "Scaling Google Ads: Lowering CPA and Maximizing ROAS",
+                excerpt: "Stop wasting budget. Discover the exact campaign structure and keyword strategies used to scale lead generation.",
+                category: "ads",
+                categoryLabel: "Paid Ads",
+                date: "Jul 18, 2026",
+                readTime: "7 min read",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                imageAlt: "Google Ads dashboard analytics",
+                tags: ["Google Ads", "PPC"]
+            },
+            {
+                id: "ai-in-digital-marketing",
+                slug: "ai-digital-marketing.html",
+                title: "The Reality of AI in Digital Marketing Strategy",
+                excerpt: "How to practically use AI for keyword research, content ideation, and ad copywriting without losing the human touch.",
+                category: "ai",
+                categoryLabel: "AI Marketing",
+                date: "Jun 05, 2026",
+                readTime: "5 min read",
+                image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                imageAlt: "AI technology integration",
+                tags: ["AI SEO", "Strategy"]
+            },
+            {
+                id: "meta-capi-setup",
+                slug: "meta-capi-setup.html",
+                title: "Setting up Meta Conversions API for E-commerce",
+                excerpt: "A technical guide to implementing Meta CAPI alongside the browser pixel to ensure 100% accurate event tracking.",
+                category: "tracking",
+                categoryLabel: "Analytics & Tracking",
+                date: "May 20, 2026",
+                readTime: "10 min read",
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                imageAlt: "E-commerce data tracking",
+                tags: ["Meta Pixel", "Stape"]
+            },
+            {
+                id: "youtube-seo-hacks",
+                slug: "youtube-seo.html",
+                title: "YouTube SEO: Ranking Videos on the First Page",
+                excerpt: "Learn how to optimize video metadata, understand viewer intent, and increase organic reach on YouTube.",
+                category: "seo",
+                categoryLabel: "SEO",
+                date: "Apr 12, 2026",
+                readTime: "6 min read",
+                image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                imageAlt: "YouTube video marketing",
+                tags: ["Video SEO", "Content"]
+            }
+        ];
+
+        // 2. DOM ELEMENTS
+        const blogGrid = document.getElementById('blog-grid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const searchInput = document.getElementById('searchInput');
+
+        // 3. RENDER FUNCTION
+        function renderBlogs(filterCategory, searchQuery = '') {
+            blogGrid.innerHTML = ''; // Clear current grid
+
+            // Filter logic (Category + Search)
+            const filtered = blogPosts.filter(post => {
+                const matchCategory = filterCategory === 'all' || post.category === filterCategory;
+                const matchSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                    post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                    post.tags.join(' ').toLowerCase().includes(searchQuery.toLowerCase());
+                return matchCategory && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                blogGrid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-solid fa-magnifying-glass" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 15px;"></i>
+                        <h3 style="color: var(--text-primary); margin-bottom: 10px;">No articles found.</h3>
+                        <p style="color: var(--text-muted);">Try searching with a different keyword or category.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Generate HTML for each post
+            filtered.forEach((post, index) => {
+                const card = document.createElement('a');
+                card.href = post.slug;
+                card.className = 'blog-card';
+                card.style.animationDelay = `${index * 0.1}s`; // Stagger animation
+
+                card.innerHTML = `
+                    <div class="blog-img">
+                        <span class="blog-category-badge">${post.categoryLabel}</span>
+                        <img src="${post.image}" alt="${post.imageAlt}" loading="lazy">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fa-regular fa-calendar"></i> ${post.date}</span>
+                            <span><i class="fa-regular fa-clock"></i> ${post.readTime}</span>
+                        </div>
+                        <h3 class="blog-title">${post.title}</h3>
+                        <p class="blog-excerpt">${post.excerpt}</p>
+                        <div class="read-more">Read Article <i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                `;
+                blogGrid.appendChild(card);
+            });
+        }
+
+        // 4. DYNAMIC COUNTS FUNCTION
+        function updateCounts() {
+            document.getElementById('count-all').innerText = blogPosts.length;
+            
+            const categories = [
+                { id: 'seo', domId: 'count-seo' },
+                { id: 'ads', domId: 'count-ads' },
+                { id: 'tracking', domId: 'count-tracking' },
+                { id: 'ai', domId: 'count-ai' }
+            ];
+
+            categories.forEach(cat => {
+                const count = blogPosts.filter(p => p.category === cat.id).length;
+                document.getElementById(cat.domId).innerText = count;
+            });
+        }
+
+        // 5. EVENT LISTENERS: Category Filter
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Clear search when clicking category
+                searchInput.value = ''; 
+                
+                const filterVal = btn.getAttribute('data-filter');
+                renderBlogs(filterVal);
+            });
+        });
+
+        // 6. EVENT LISTENERS: Search Bar
+        searchInput.addEventListener('input', (e) => {
+            // Reset categories to "All" when searching
+            filterBtns.forEach(b => b.classList.remove('active'));
+            document.querySelector('[data-filter="all"]').classList.add('active');
+            
+            renderBlogs('all', e.target.value);
+        });
+
+        // Initialize Page
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounts();
+            renderBlogs('all');
+        });
+
+    </script>
+</body>
+</html>

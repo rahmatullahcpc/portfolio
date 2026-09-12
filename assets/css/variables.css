@@ -1,0 +1,67 @@
+/* =========================================
+   DESIGN SYSTEM - VARIABLES
+   ========================================= */
+
+:root {
+    /* 🎨 Primary Colors (Premium Teal / Dark Green Vibe) */
+    --primary-color: #10b981; /* Elegant Emerald Green / Teal */
+    --primary-hover: #059669; /* Darker green for hover effects */
+    --primary-light: rgba(16, 185, 129, 0.1);
+    
+    /* 🌗 Dark Theme (Default - Deep Navy) */
+    --bg-color: #0f172a; /* Deep Navy Background */
+    --surface-color: #1e293b; /* Slightly lighter navy for cards/sections */
+    --surface-hover: #334155;
+    
+    /* Typography Colors */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.1);
+    
+    /* 🧊 Glassmorphism Effects */
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --glass-blur: blur(12px);
+
+    /* 📝 Typography (Inter for a clean, modern tech look) */
+    --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+    
+    /* 📐 Spacing System */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 4rem;
+    --space-xl: 6rem;
+
+    /* 💠 Border Radius (Modern & Soft) */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+
+    /* ⚡ Animations & Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* 🌑 Shadows */
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 25px -3px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.2); /* Premium glow for buttons */
+}
+
+/* ☀️ Light Theme Variables */
+[data-theme="light"] {
+    --bg-color: #f8fafc; /* Very light slate */
+    --surface-color: #ffffff; /* Pure white cards */
+    --surface-hover: #f1f5f9;
+    
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --border-color: rgba(0, 0, 0, 0.1);
+    
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(0, 0, 0, 0.05);
+    
+    --shadow-md: 0 10px 25px -3px rgba(0, 0, 0, 0.05);
+}

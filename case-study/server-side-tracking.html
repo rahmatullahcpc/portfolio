@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Server Side Tracking | Rahmat Ullah</title>
+    
+    <!-- Fonts, Icons & AOS CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Custom CSS (Linked with ../ for subfolder) -->
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <style>
+        /* Case Study Specific Styles */
+        .cs-hero {
+            padding: 150px 20px 80px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-color) 0%, var(--surface-color) 100%);
+        }
+        .cs-category {
+            display: inline-block;
+            background: rgba(0, 200, 150, 0.1);
+            color: var(--primary-color);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .cs-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            max-width: 900px;
+            margin: 0 auto 20px;
+            line-height: 1.2;
+        }
+        .cs-image {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            margin: 40px auto 0;
+            display: block;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        /* Overview Grid */
+        .cs-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 16px;
+            margin: -50px auto 60px;
+            max-width: 1000px;
+            position: relative;
+            z-index: 10;
+        }
+        .overview-item h5 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; }
+        .overview-item p { color: var(--text-primary); font-weight: 600; font-size: 1.1rem; }
+
+        /* Content Area */
+        .cs-content { max-width: 800px; margin: 0 auto; padding-bottom: 80px; color: var(--text-muted); line-height: 1.8; font-size: 1.1rem; padding: 0 20px; }
+        .cs-content h2 { color: var(--text-primary); font-size: 2rem; margin: 50px 0 20px; }
+        .cs-content h3 { color: var(--text-primary); margin: 30px 0 15px; }
+        .cs-content ul { margin-left: 20px; margin-bottom: 20px; }
+        .cs-content li { margin-bottom: 10px; }
+        
+        /* Results Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .metric-card {
+            background: var(--surface-color);
+            border: 1px solid var(--glass-border);
+            border-left: 4px solid var(--primary-color);
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .metric-value { font-size: 2.5rem; font-weight: 800; color: var(--primary-color); margin-bottom: 10px; }
+        .metric-label { font-size: 1rem; color: var(--text-primary); font-weight: 500; }
+
+        /* Testimonial */
+        .cs-testimonial {
+            background: linear-gradient(135deg, rgba(0, 200, 150, 0.1), rgba(0,0,0,0));
+            border: 1px solid var(--primary-color);
+            padding: 40px;
+            border-radius: 16px;
+            margin: 60px 0;
+            text-align: center;
+        }
+        .cs-testimonial p { font-size: 1.2rem; font-style: italic; color: #fff; margin-bottom: 20px; }
+        .cs-testimonial h5 { color: var(--primary-color); }
+    </style>
+</head>
+<body>
+
+    <!-- ================= START OF UNIVERSAL HEADER ================= -->
+    <header class="header" id="header">
+        <nav class="navbar container">
+            <a href="../index.html" class="logo">Rahmat<span>.</span></a>
+            <div class="nav-menu mobile-only-hide" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item">
+                        <a href="../about.html" class="nav-link">About <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="../about.html">About Me</a>
+                            <a href="../about.html#skills">Skills & Tools</a>
+                            <a href="../about.html#certifications">Certifications</a>
+                            <a href="../about.html#training">Training</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../services.html" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="../services.html#seo">SEO</a>
+                            <a href="../services.html#google-ads">Google Ads</a>
+                            <a href="../services.html#meta-ads">Meta Ads</a>
+                            <a href="../services.html#analytics">Analytics & Tracking</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="../projects.html" class="nav-link active">Projects</a></li>
+                    <li class="nav-item"><a href="../courses.html" class="nav-link">Courses</a></li>
+                    <li class="nav-item"><a href="../free-hosting.html" class="nav-link">free-hosting</a></li>
+                    <li class="nav-item"><a href="../blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="../contact.html" class="nav-link">contact</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions mobile-only-hide">
+                <button class="theme-toggle" id="theme-button"><i class="fa-regular fa-sun" id="theme-icon"></i></button>
+                <a href="../contact.html" class="btn btn-primary btn-transparent-hover">Let's Talk</a>
+            </div>
+        </nav>
+    </header>
+    <!-- ================= END OF UNIVERSAL HEADER ================= -->
+
+    <!-- MOBILE APP BOTTOM BAR & OVERLAY -->
+    <div class="bottom-app-bar mobile-only">
+        <a href="../index.html" class="app-bar-item"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="../services.html" class="app-bar-item"><i class="fa-solid fa-briefcase"></i>Services</a>
+        <a href="../courses.html" class="app-bar-item"><i class="fa-solid fa-graduation-cap"></i>Courses</a>
+        <a href="../contact.html" class="app-bar-item"><i class="fa-solid fa-paper-plane"></i>Contact</a>
+        <div class="app-bar-item" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i>Menu</div>
+    </div>
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <i class="fa-solid fa-xmark close-menu" id="close-menu"></i>
+        <div class="mobile-menu-list">
+            <a href="../index.html">Home</a>
+            <a href="../about.html">About Me</a>
+            <a href="../services.html">Services</a>
+            <a href="../projects.html" style="color: var(--primary-color);">Projects</a>
+            <a href="../courses.html">Courses</a>
+            <a href="../free-hosting.html">free-hosting</a>
+            <a href="../blog.html">Blog</a>
+            <a href="../contact.html">contact</a>
+        </div>
+    </div>
+
+    <main class="main">
+        <!-- 1. HERO SECTION -->
+        <section class="cs-hero">
+            <div class="container" data-aos="fade-up">
+                <span class="cs-category">Analytics & Tracking</span>
+                <h1 class="cs-title">Fixing iOS 14 Data Loss: <span style="color: var(--primary-color);">100% Accurate</span> Event Tracking</h1>
+                <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Engineered a robust server-side tracking environment utilizing GTM, GA4, and Meta CAPI to bypass iOS restrictions and restore ad performance.</p>
+                
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Server Side Tracking Dashboard" class="cs-image">
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- 2. PROJECT OVERVIEW -->
+            <div class="cs-overview" data-aos="fade-up">
+                <div class="overview-item"><h5>Client Industry</h5><p>Global E-commerce</p></div>
+                <div class="overview-item"><h5>Services</h5><p>GTM, GA4 & Meta CAPI</p></div>
+                <div class="overview-item"><h5>Platform</h5><p>Stape.io / Google Cloud</p></div>
+                <div class="overview-item"><h5>Key Focus</h5><p>Data Accuracy & EMQ</p></div>
+            </div>
+
+            <!-- 3. MAIN CONTENT -->
+            <div class="cs-content">
+                <div data-aos="fade-up">
+                    <h2>The Challenge</h2>
+                    <p>Post-iOS 14, the client's Meta Pixel was missing up to 40% of their actual purchase data due to Intelligent Tracking Prevention (ITP) and ad-blockers. Because the ad algorithms weren't receiving accurate conversion signals, campaign optimization was failing, CPA was skyrocketing, and ROAS attribution in GA4 was a complete mess.</p>
+                </div>
+
+                <div data-aos="fade-up">
+                    <h2>The Strategy</h2>
+                    <p>We bypassed unstable browser restrictions by shifting the data collection architecture to the server level:</p>
+                    <ul>
+                        <li><strong>Server-Side Container Setup:</strong> Deployed a secure Google Tag Manager (GTM) Server-Side container via Stape.io on a custom subdomain (e.g., tracking.clientdomain.com) to establish first-party context.</li>
+                        <li><strong>Meta Conversions API (CAPI):</strong> Configured a direct server-to-server connection to Meta, ensuring offline events and purchases were transmitted securely.</li>
+                        <li><strong>Event Deduplication:</strong> Implemented strict Event IDs to ensure Meta received browser and server events without double-counting conversions.</li>
+                        <li><strong>Advanced Data Layer:</strong> Enriched the e-commerce Data Layer to pass robust user parameters (hashed email, phone, city) to maximize the Event Match Quality (EMQ) score.</li>
+                    </ul>
+                </div>
+
+                <div data-aos="fade-up">
+                    <h2>The Results</h2>
+                    <p>Within two weeks of the technical deployment, the gap between backend sales and ad platform reporting was completely closed, revitalizing the algorithm's ability to hunt for profitable conversions.</p>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">9.5/10</div>
+                            <div class="metric-label">Meta Event Match Quality</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">100%</div>
+                            <div class="metric-label">Purchase Data Accuracy</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">+20%</div>
+                            <div class="metric-label">Improved Ad Optimization</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cs-testimonial" data-aos="fade-up">
+                    <i class="fa-solid fa-quote-left" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+                    <p>"Our data is finally matching our backend sales. This technical setup saved our ad account from flying blind. Rahmat's expertise in CAPI is unmatched."</p>
+                    <h5>— Head of E-commerce, Global Brand</h5>
+                </div>
+                
+                <!-- CTA -->
+                <div style="text-align: center; margin-top: 50px; margin-bottom: 50px;" data-aos="fade-up">
+                    <h3 style="margin-bottom: 20px;">Losing conversion data? Let's fix your tracking.</h3>
+                    <a href="../contact.html" class="btn btn-primary">Start a Conversation <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ================= START OF UNIVERSAL FOOTER ================= -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="../index.html" class="logo" style="margin-bottom: 20px; display: inline-block;">Rahmat<span>.</span></a>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Digital Marketing Strategist & SEO Expert.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About Me</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../projects.html">Projects</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="../services.html#seo">SEO Optimization</a></li>
+                    <li><a href="../services.html#google-ads">Paid Advertising</a></li>
+                    <li><a href="../services.html#analytics">Analytics & Tracking</a></li>
+                    <li><a href="../services.html#web-dev">Web Development</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                    <li><a href="mailto:rahmatullah.dms@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Rahmat Ullah. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- ================= END OF UNIVERSAL FOOTER ================= -->
+
+    <!-- FLOATING BUTTONS -->
+    <a href="https://wa.me/8801613112746" target="_blank" class="floating-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <div class="floating-chatbot" onclick="alert('AI Assistant is coming soon!')">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 50 });
+    </script>
+</body>
+</html>
